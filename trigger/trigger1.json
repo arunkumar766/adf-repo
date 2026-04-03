@@ -1,0 +1,28 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "FirstPipeline",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"TodaysDate": "Noothing"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/ltmcontainer/blobs/",
+			"blobPathEndsWith": "*.CSV",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/b8b361d6-f8a0-4939-b7c9-6cf479bce961/resourceGroups/LTMResourceGroup/providers/Microsoft.Storage/storageAccounts/ltmstorageaccount1",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
