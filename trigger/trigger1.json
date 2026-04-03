@@ -2,15 +2,25 @@
 	"name": "trigger1",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
-		"pipelines": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "FirstPipeline",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"TodaysDate": "NA"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 2,
-				"startTime": "2026-04-03T18:05:00",
-				"endTime": "2026-04-03T23:59:00",
+				"startTime": "2026-04-03T18:06:00",
+				"endTime": "2026-04-04T23:59:00",
 				"timeZone": "India Standard Time"
 			}
 		}
