@@ -5,11 +5,38 @@
 		"factoryName": {
 			"value": "ltmadf1"
 		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage1_properties_typeProperties_serviceEndpoint": {
 			"value": "https://ltmstorageaccount1.blob.core.windows.net/"
 		},
 		"AzureBlobStorage2_properties_typeProperties_serviceEndpoint": {
 			"value": "https://ltmstorageaccount1.blob.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://ltmKV.vault.azure.net/"
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"value": "https://ltmKV.vault.azure.net/"
+		},
+		"AzureKeyVault3_properties_typeProperties_baseUrl": {
+			"value": "https://ltmKV.vault.azure.net/"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"value": "sql-server-test-3.database.windows.net"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"value": "sqldb"
+		},
+		"SqlServer3_properties_typeProperties_server": {
+			"value": "sql-server-test-3.database.windows.net"
+		},
+		"SqlServer3_properties_typeProperties_database": {
+			"value": "sqldb"
+		},
+		"SqlServer3_properties_typeProperties_userName": {
+			"value": "sqladmin"
 		},
 		"containerUri": {
 			"value": ""
