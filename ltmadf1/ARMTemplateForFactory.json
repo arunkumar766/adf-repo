@@ -565,7 +565,7 @@
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/ltmcontainer/blobs/",
-					"blobPathEndsWith": "*.CSV",
+					"blobPathEndsWith": "*.csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
 					"events": [
