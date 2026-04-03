@@ -11,8 +11,63 @@
 				"typeProperties": {
 					"waitTimeInSeconds": 1
 				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Healthy_Wealthy_Happy_Lucky",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "Current_Date",
+								"value": {
+									"value": "@pipeline().parameters.TodaysDate",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
+		"parameters": {
+			"TodaysDate": {
+				"type": "string",
+				"defaultValue": "April,04,2026"
+			}
+		},
 		"annotations": []
 	}
 }
