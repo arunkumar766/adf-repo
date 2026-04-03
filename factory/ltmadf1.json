@@ -1,0 +1,15 @@
+{
+	"name": "ltmadf1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "a9b02451-57ac-421f-bb08-5c3eaa00abab",
+		"tenantId": "ff355289-721e-4dd7-a663-afec62ab9d54",
+		"userAssignedIdentities": {
+			"/subscriptions/b8b361d6-f8a0-4939-b7c9-6cf479bce961/resourcegroups/LTMResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ltmUAMI": {
+				"clientId": "677ec82a-e905-476e-8878-d249991eff4c",
+				"principalId": "4ea0c599-7e03-4983-b26d-04db59f039f9"
+			}
+		}
+	}
+}
