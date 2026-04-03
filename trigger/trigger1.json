@@ -2,27 +2,17 @@
 	"name": "trigger1",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "FirstPipeline",
-					"type": "PipelineReference"
-				},
-				"parameters": {
-					"TodaysDate": "Nothing"
-				}
-			}
-		],
-		"type": "BlobEventsTrigger",
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/ltmcontainer/blobs/",
-			"blobPathEndsWith": "*.csv",
-			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/b8b361d6-f8a0-4939-b7c9-6cf479bce961/resourceGroups/LTMResourceGroup/providers/Microsoft.Storage/storageAccounts/ltmstorageaccount1",
-			"events": [
-				"Microsoft.Storage.BlobCreated"
-			]
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2026-04-03T18:05:00",
+				"endTime": "2026-04-03T23:59:00",
+				"timeZone": "India Standard Time"
+			}
 		}
 	}
 }
