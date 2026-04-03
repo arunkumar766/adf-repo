@@ -1,0 +1,23 @@
+{
+	"name": "SqlServer3",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "sql-server-test-3.database.windows.net",
+			"database": "sqldb",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "sqladmin",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault3",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SQLPassword"
+			}
+		}
+	}
+}
