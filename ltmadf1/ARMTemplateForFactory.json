@@ -53,7 +53,7 @@
 		},
 		"trigger1_properties_FirstPipeline_parameters_TodaysDate": {
 			"type": "string",
-			"defaultValue": "Noothing"
+			"defaultValue": "Nothing"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
