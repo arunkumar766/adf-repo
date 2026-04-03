@@ -50,6 +50,14 @@
 		"SqlServer3_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sqladmin"
+		},
+		"trigger1_properties_FirstPipeline_parameters_TodaysDate": {
+			"type": "string",
+			"defaultValue": "Noothing"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b8b361d6-f8a0-4939-b7c9-6cf479bce961/resourceGroups/LTMResourceGroup/providers/Microsoft.Storage/storageAccounts/ltmstorageaccount1"
 		}
 	},
 	"variables": {
@@ -534,6 +542,39 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "FirstPipeline",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"TodaysDate": "[parameters('trigger1_properties_FirstPipeline_parameters_TodaysDate')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/ltmcontainer/blobs/",
+					"blobPathEndsWith": "*.CSV",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/FirstPipeline')]"
 			]
 		}
 	]
