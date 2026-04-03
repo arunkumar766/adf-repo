@@ -4,6 +4,12 @@
 	"parameters": {
 		"factoryName": {
 			"value": "ltmadf1"
+		},
+		"AzureBlobStorage1_properties_typeProperties_serviceEndpoint": {
+			"value": "https://ltmstorageaccount1.blob.core.windows.net/"
+		},
+		"AzureBlobStorage2_properties_typeProperties_serviceEndpoint": {
+			"value": "https://ltmstorageaccount1.blob.core.windows.net/"
 		}
 	}
 }
