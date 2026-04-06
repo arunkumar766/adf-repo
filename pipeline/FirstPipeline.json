@@ -148,6 +148,33 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "CallSP",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "LoadIntoStage",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[MergeStageIntoActual]"
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_sql_060426",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
