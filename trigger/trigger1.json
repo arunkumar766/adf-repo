@@ -6,11 +6,11 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "FirstPipeline",
+					"referenceName": "CSVtoSQL",
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"TodaysDate": "NA"
+					"pFullFilePath": "NA"
 				}
 			}
 		],
