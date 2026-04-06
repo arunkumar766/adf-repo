@@ -201,8 +201,42 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "SendEmailOnCompletion",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ExecuteFileCreationPipeline",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-05.eastus.logic.azure.com:443/workflows/47ba71c3d14d49299406200cc9d834e6/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=JyM8TvGMddx9ebFiRwhz0ELKl0aVdBTeuhoZEtizQXI",
+					"body": {
+						"value": "{\n    \"FileName\":\"FinalEmployee.CSV\",\n    \"PipelineName\":@{pipeline().Pipeline},\n    \"FullFilePath\":\"\"\n}",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"parameters": {
+			"pFullFilePath": {
+				"type": "string",
+				"defaultValue": "ltmstorageaccount1/completed/FinalEmployee.CSV"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2026-04-03T12:44:22Z"
 	},
