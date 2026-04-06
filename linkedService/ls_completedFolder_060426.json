@@ -1,0 +1,15 @@
+{
+	"name": "ls_completedFolder_060426",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://ltmstorageaccount1.blob.core.windows.net/",
+			"accountKind": "StorageV2",
+			"credential": {
+				"referenceName": "credential4",
+				"type": "CredentialReference"
+			}
+		}
+	}
+}
