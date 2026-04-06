@@ -1,0 +1,23 @@
+{
+	"name": "ds_tgt_csv_1_060426",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_completedFolder_060426",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "FinalEmployee.CSV",
+				"container": "completed"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
