@@ -15,8 +15,6 @@
 			{
 				"name": "LoadAllFIles",
 				"type": "GetMetadata",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Healthy_Wealthy_Happy_Lucky",
@@ -53,8 +51,6 @@
 			{
 				"name": "FilterOnlyCSV",
 				"type": "Filter",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "LoadAllFIles",
@@ -78,8 +74,6 @@
 			{
 				"name": "ForEachCSVFiles",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "FilterOnlyCSV",
@@ -188,8 +182,6 @@
 			{
 				"name": "ExecuteFileCreationPipeline",
 				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ForEachCSVFiles",
