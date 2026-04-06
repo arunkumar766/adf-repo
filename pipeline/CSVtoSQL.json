@@ -1,5 +1,5 @@
 {
-	"name": "FirstPipeline",
+	"name": "CSVtoSQL",
 	"properties": {
 		"activities": [
 			{
