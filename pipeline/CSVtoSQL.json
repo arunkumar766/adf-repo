@@ -175,6 +175,29 @@
 								"referenceName": "ls_sql_060426",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "ExecuteFileCreationPipeline",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "CallSP",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "SQLtoCSV",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
 						}
 					]
 				}
