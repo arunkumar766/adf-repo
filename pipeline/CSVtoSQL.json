@@ -225,7 +225,7 @@
 					"method": "POST",
 					"url": "https://prod-05.eastus.logic.azure.com:443/workflows/47ba71c3d14d49299406200cc9d834e6/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=JyM8TvGMddx9ebFiRwhz0ELKl0aVdBTeuhoZEtizQXI",
 					"body": {
-						"value": "{\n    \"FileName\":\"FinalEmployee.CSV\",\n    \"PipelineName\":@{pipeline().Pipeline},\n    \"FullFilePath\":\"\"\n}",
+						"value": "{\n    \"FileName\":\"FinalEmployee.CSV\",\n    \"PipelineName\":\"@{pipeline().Pipeline}\",\n    \"FullFilePath\":\"@{pipeline().parameters.pFullFilePath}\"\n}",
 						"type": "Expression"
 					}
 				}
