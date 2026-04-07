@@ -113,8 +113,7 @@
 				"          History_Salary,",
 				"          History_JoinDate,",
 				"          History_Current_Date,",
-				"          History_IsActive,",
-				"          History_SurrogateKey",
+				"          History_IsActive",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectHistoryColumns",
@@ -179,8 +178,7 @@
 				"          Salary = History_Salary,",
 				"          JoinDate = History_JoinDate,",
 				"          Current_Date = History_Current_Date,",
-				"          IsActive = IsActiveZero,",
-				"          SurrogateKey = History_SurrogateKey",
+				"          IsActive = IsActiveZero",
 				"     )) ~> HistorySink"
 			]
 		}
