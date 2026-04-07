@@ -1,0 +1,188 @@
+{
+	"name": "SCDType2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_mainTable_070426",
+						"type": "DatasetReference"
+					},
+					"name": "SQLMainTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_History_SQL_070426",
+						"type": "DatasetReference"
+					},
+					"name": "SQLHistoryTable"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_History_SQL_070426",
+						"type": "DatasetReference"
+					},
+					"name": "DirectLoad"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_History_SQL_070426",
+						"type": "DatasetReference"
+					},
+					"name": "HistorySink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "UpdateIsActive"
+				},
+				{
+					"name": "RenamedHistoryColumn"
+				},
+				{
+					"name": "joinHistoryandMain"
+				},
+				{
+					"name": "IsActiveasZero"
+				},
+				{
+					"name": "alterHistoryRow"
+				},
+				{
+					"name": "selectHistoryColumns"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeeID as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Department as string,",
+				"          Salary as string,",
+				"          JoinDate as string,",
+				"          Current_Date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SQLMainTable",
+				"source(output(",
+				"          EmployeeID as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Department as string,",
+				"          Salary as string,",
+				"          JoinDate as string,",
+				"          Current_Date as string,",
+				"          IsActive as integer,",
+				"          SurrogateKey as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SQLHistoryTable",
+				"SQLMainTable derive(IsActive = 1) ~> UpdateIsActive",
+				"SQLHistoryTable select(mapColumn(",
+				"          History_EmployeeID = EmployeeID,",
+				"          History_FirstName = FirstName,",
+				"          History_LastName = LastName,",
+				"          History_Department = Department,",
+				"          History_Salary = Salary,",
+				"          History_JoinDate = JoinDate,",
+				"          History_Current_Date = Current_Date,",
+				"          History_IsActive = IsActive,",
+				"          History_SurrogateKey = SurrogateKey",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenamedHistoryColumn",
+				"SQLMainTable, RenamedHistoryColumn join(EmployeeID == History_EmployeeID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinHistoryandMain",
+				"selectHistoryColumns derive(IsActiveZero = 0) ~> IsActiveasZero",
+				"IsActiveasZero alterRow(updateIf(1==1)) ~> alterHistoryRow",
+				"joinHistoryandMain select(mapColumn(",
+				"          History_EmployeeID,",
+				"          History_FirstName,",
+				"          History_LastName,",
+				"          History_Department,",
+				"          History_Salary,",
+				"          History_JoinDate,",
+				"          History_Current_Date,",
+				"          History_IsActive,",
+				"          History_SurrogateKey",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectHistoryColumns",
+				"UpdateIsActive sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeeID as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Department as string,",
+				"          Salary as string,",
+				"          JoinDate as string,",
+				"          Current_Date as string,",
+				"          IsActive as integer,",
+				"          SurrogateKey as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 2,",
+				"     mapColumn(",
+				"          EmployeeID,",
+				"          FirstName,",
+				"          LastName,",
+				"          Department,",
+				"          Salary,",
+				"          JoinDate,",
+				"          Current_Date,",
+				"          IsActive",
+				"     )) ~> DirectLoad",
+				"alterHistoryRow sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeeID as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Department as string,",
+				"          Salary as string,",
+				"          JoinDate as string,",
+				"          Current_Date as string,",
+				"          IsActive as integer,",
+				"          SurrogateKey as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['SurrogateKey'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     mapColumn(",
+				"          EmployeeID = History_EmployeeID,",
+				"          FirstName = History_FirstName,",
+				"          LastName = History_LastName,",
+				"          Department = History_Department,",
+				"          Salary = History_Salary,",
+				"          JoinDate = History_JoinDate,",
+				"          Current_Date = History_Current_Date,",
+				"          IsActive = IsActiveZero,",
+				"          SurrogateKey = History_SurrogateKey",
+				"     )) ~> HistorySink"
+			]
+		}
+	}
+}

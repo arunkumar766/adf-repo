@@ -1,0 +1,55 @@
+{
+	"name": "ds_History_SQL_070426",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_060426",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EmployeeID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Department",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Salary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JoinDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Current_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IsActive",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SurrogateKey",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employee_History"
+		}
+	}
+}

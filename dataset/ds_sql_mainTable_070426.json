@@ -1,0 +1,45 @@
+{
+	"name": "ds_sql_mainTable_070426",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_060426",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EmployeeID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Department",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Salary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JoinDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Current_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employee"
+		}
+	}
+}
