@@ -179,7 +179,8 @@
 				"          Salary = History_Salary,",
 				"          JoinDate = History_JoinDate,",
 				"          Current_Date = History_Current_Date,",
-				"          IsActive = IsActiveZero",
+				"          IsActive = IsActiveZero,",
+				"          SurrogateKey = History_SurrogateKey",
 				"     )) ~> HistorySink"
 			]
 		}
