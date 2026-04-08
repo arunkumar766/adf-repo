@@ -32,7 +32,7 @@
 						"referenceName": "ds_History_SQL_070426",
 						"type": "DatasetReference"
 					},
-					"name": "HistorySink"
+					"name": "UpdatedHistorySink"
 				}
 			],
 			"transformations": [
@@ -43,16 +43,19 @@
 					"name": "RenamedHistoryColumn"
 				},
 				{
-					"name": "joinHistoryandMain"
+					"name": "lookupSrcTrgt"
 				},
 				{
-					"name": "IsActiveasZero"
-				},
-				{
-					"name": "alterHistoryRow"
+					"name": "filterOnlyExistingRows"
 				},
 				{
 					"name": "selectHistoryColumns"
+				},
+				{
+					"name": "UpdatedIsActive"
+				},
+				{
+					"name": "alterRow"
 				}
 			],
 			"scriptLines": [
@@ -98,14 +101,12 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> RenamedHistoryColumn",
-				"SQLMainTable, RenamedHistoryColumn join(EmployeeID == History_EmployeeID,",
-				"     joinType:'inner',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joinHistoryandMain",
-				"selectHistoryColumns derive(IsActiveZero = 0) ~> IsActiveasZero",
-				"IsActiveasZero alterRow(updateIf(1==1)) ~> alterHistoryRow",
-				"joinHistoryandMain select(mapColumn(",
+				"SQLMainTable, RenamedHistoryColumn lookup(EmployeeID == History_EmployeeID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookupSrcTrgt",
+				"lookupSrcTrgt filter(!isNull(History_EmployeeID)) ~> filterOnlyExistingRows",
+				"filterOnlyExistingRows select(mapColumn(",
 				"          History_EmployeeID,",
 				"          History_FirstName,",
 				"          History_LastName,",
@@ -113,10 +114,13 @@
 				"          History_Salary,",
 				"          History_JoinDate,",
 				"          History_Current_Date,",
-				"          History_IsActive",
+				"          History_IsActive,",
+				"          History_SurrogateKey",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectHistoryColumns",
+				"selectHistoryColumns derive(ExistingisActive = 0) ~> UpdatedIsActive",
+				"UpdatedIsActive alterRow(updateIf(1==1)) ~> alterRow",
 				"UpdateIsActive sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -148,7 +152,7 @@
 				"          Current_Date,",
 				"          IsActive",
 				"     )) ~> DirectLoad",
-				"alterHistoryRow sink(allowSchemaDrift: true,",
+				"alterRow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          EmployeeID as string,",
@@ -165,7 +169,7 @@
 				"     insertable:false,",
 				"     updateable:false,",
 				"     upsertable:true,",
-				"     keys:['EmployeeID'],",
+				"     keys:['SurrogateKey'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -178,8 +182,9 @@
 				"          Salary = History_Salary,",
 				"          JoinDate = History_JoinDate,",
 				"          Current_Date = History_Current_Date,",
-				"          IsActive = IsActiveZero",
-				"     )) ~> HistorySink"
+				"          IsActive = ExistingisActive,",
+				"          SurrogateKey = History_SurrogateKey",
+				"     )) ~> UpdatedHistorySink"
 			]
 		}
 	}
