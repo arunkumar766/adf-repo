@@ -169,7 +169,7 @@
 				"     insertable:false,",
 				"     updateable:false,",
 				"     upsertable:true,",
-				"     keys:['SurrogateKey'],",
+				"     keys:['EmployeeID'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -182,8 +182,7 @@
 				"          Salary = History_Salary,",
 				"          JoinDate = History_JoinDate,",
 				"          Current_Date = History_Current_Date,",
-				"          IsActive = ExistingisActive,",
-				"          SurrogateKey = History_SurrogateKey",
+				"          IsActive = ExistingisActive",
 				"     )) ~> UpdatedHistorySink"
 			]
 		}
