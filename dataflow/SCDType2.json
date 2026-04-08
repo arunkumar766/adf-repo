@@ -169,8 +169,9 @@
 				"     insertable:false,",
 				"     updateable:false,",
 				"     upsertable:true,",
-				"     keys:['EmployeeID'],",
+				"     keys:['SurrogateKey'],",
 				"     format: 'table',",
+				"     preSQLs:['SET IDENTITY_INSERT dbo.Employee_History ON'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
@@ -182,7 +183,8 @@
 				"          Salary = History_Salary,",
 				"          JoinDate = History_JoinDate,",
 				"          Current_Date = History_Current_Date,",
-				"          IsActive = ExistingisActive",
+				"          IsActive = ExistingisActive,",
+				"          SurrogateKey = History_SurrogateKey",
 				"     )) ~> UpdatedHistorySink"
 			]
 		}
