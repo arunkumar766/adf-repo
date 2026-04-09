@@ -98,7 +98,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "SELECT EmployeeID,FirstName,LastName,Department,Salary,JoinDate,Current_Date FROM Employee_Stage\nwhere JoinDate > '@{activity('LookupLastInsertDate').output.value[0].LatestDate}'",
+										"value": "SELECT EmployeeID,FirstName,LastName,Department,Salary,JoinDate,[Current_Date] FROM Employee_Stage\nwhere JoinDate > '@{activity('LookupLastInsertDate').output.value[0].LatestDate}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
