@@ -240,7 +240,7 @@
 							"typeProperties": {
 								"source": {
 									"type": "SqlServerSource",
-									"sqlReaderQuery": "select 'Employee',max(JoinDate) from employee",
+									"sqlReaderQuery": "select 'Employee' as 'TableName',max(JoinDate) as 'LatestDate' from employee",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
