@@ -1,0 +1,16 @@
+{
+	"name": "ds_SQL_lastdate_090426",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_060426",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "LastUpdatedDate"
+		}
+	}
+}
