@@ -81,6 +81,17 @@
 						"value": "@greater(activity('GetTotalCount').output.resultSets[0].rows[0].TotalCount,0)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "We are in false part",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Copy data from source to target",
@@ -246,7 +257,13 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"writeBehavior": "insert",
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": false,
+										"keys": [
+											"TableName"
+										]
+									},
 									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
