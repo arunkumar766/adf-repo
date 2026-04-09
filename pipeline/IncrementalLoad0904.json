@@ -83,7 +83,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "We are in false part",
+							"name": "There is no new data to laod",
 							"type": "Wait",
 							"dependsOn": [],
 							"userProperties": [],
