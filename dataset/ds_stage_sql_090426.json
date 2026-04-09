@@ -1,0 +1,12 @@
+{
+	"name": "ds_stage_sql_090426",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_060426",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
