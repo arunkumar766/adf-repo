@@ -56,7 +56,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "select count(*) as TotalCount from dbo.Employee_Stage\nwhere JoinDate > '@{activity('LookupLastInsertDate').output.value[0].LatestDate}'",
+								"value": "select count(*) as TotalCount from dbo.Employee_Stage\nwhere JoinDate > '@{if(empty(pipeline().parameters.BackDate), activity('LookupLastInsertDate').output.value[0].LatestDate,pipeline().parameters.BackDate)}'",
 								"type": "Expression"
 							}
 						}
@@ -109,7 +109,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "SELECT EmployeeID,FirstName,LastName,Department,Salary,JoinDate,[Current_Date] FROM Employee_Stage\nwhere JoinDate > '@{activity('LookupLastInsertDate').output.value[0].LatestDate}'",
+										"value": "SELECT EmployeeID,FirstName,LastName,Department,Salary,JoinDate,[Current_Date] FROM Employee_Stage\nwhere JoinDate > '@{if( empty(pipeline().parameters.BackDate), activity('LookupLastInsertDate').output.value[0].LatestDate,pipeline().parameters.BackDate)}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -293,6 +293,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"BackDate": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
